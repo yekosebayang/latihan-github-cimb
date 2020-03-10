@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let init = alert("TOKO 4 BUAH")
+      let satu = parseInt(prompt("Anggur 20/pcs   | Stock tersedia: 20"))
+      let duwa = parseInt(prompt("Jeruk  15/pcs   | Stock tersedia: 15"))
+      let tiga = parseInt(prompt("Mangga 25/pcs   | Stock tersedia: 25"))
+      let empt = parseInt(prompt("Apel   10/pcs   | Sstock tersedia: 10"))
+
+      //stock item
+      let angr = parseInt(20)
+      let jruk = parseInt(15)
+      let mgga = parseInt(25)
+      let apel = parseInt(10)
+
+      //stock item
+      let pangr = parseInt(1)
+      let pjruk = parseInt(2)
+      let pmgga = parseInt(3)
+      let papel = parseInt(4)
+
+      //hitung
+      let hangr = parseInt(satu * pangr)
+      let hjruk = parseInt(duwa * pjruk)
+      let hmgga = parseInt(tiga * pmgga)
+      let hapel = parseInt(empt * papel)
+      let total = parseInt(hangr + hjruk + hmgga + hapel)
+
+      //cek stock
+      if ((satu < 0) || (duwa < 0) || (tiga < 0) || (empt < 0))
+        {alert("kamu naro angka kekecilan sayang")}
+      if (satu <= angr && duwa <= jruk && tiga <= mgga && empt <= apel)
+        //alert('Total belanjaan =' + (hangr + hjruk + hmgga + hapel))
+        {let bayar = parseInt(prompt("Total belanjaan = " + total + " Masukan uang anda"))
+        if (bayar < total) 
+        {alert("Uangnya kurang " + (total - bayar))}
+        else if (bayar > total)
+        {alert("Uangnya lebih " + (bayar - total))}
+        else 
+          alert("Terimakasih")
+        }
+      else alert("Stock ada yang kurang, kepo kan? tanya yang jual")
+    </script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const cipher = () => {
+        let word = prompt("kasih kata yg mau di kripto")
+        let num  = parseInt(prompt("mau di geser berapa?"))
+        let Alphabet =(" abcdefghijklmnopqrstuvwxyz")
+
+// casearCipher
+    const function26 = () => {
+        if (num <= 26){
+            // numBaru = num
+            // alert('num setelah diolah= '+num)
+        //   return num
+          }
+        else if (num > 26){
+          while (num > 26){
+            num -= 26}}
+            // num= num}
+            // alert('num setelah diolah= '+num)}}
+            // return num}
+    }
+
+    const functionHurufkeAngka = (val,jadiNomor,imput) => {
+        let arrAlphabet = Alphabet.split('')
+        let foo = 0
+        // jadiNomor.fill(0)
+        for (let i=0; i<val.length; i++) {
+            foo = parseInt(arrAlphabet.indexOf(val[i].toLowerCase()))
+            if ((foo + imput) > 26){
+                jadiNomor.push(foo - 26)
+                foo = 0}
+            else{
+                jadiNomor.push(arrAlphabet.indexOf(val[i].toLowerCase()))}
+            }
+        // alert('Berubah jadi nomor ini= '+jadiNomor) 
+        return jadiNomor}
+            
+    const functionAngkakeHuruf = (val,jadiHuruf) => {
+        let arrAlphabet = Alphabet.split('')
+        for (let i=0; i<val.length; i++){
+            // jadiHuruf += arrAlphabet[val[i]]
+            // alert('Di tambah num, jadi ini= '+arrAlphabet[val[i]])
+            jadiHuruf.push(arrAlphabet[val[i]])}
+        return jadiHuruf
+    }
+
+    const functionValueAdd = (a) => {
+        return a+num}
+    
+    const caesarCipher = (word, num) => {
+        // alert('numhasilolah: ' + num)
+    // 1. ubah jadi array
+    // 2. geser array yang diambil sesuai angka yang dimasukkan
+    //  > ambil angka, 
+    //  > ambil a-z
+    //  > ambil hurup, 
+    //  > mulai geser dari hurup,
+    //  > geser sebanyak nomor yg dimasukan
+    //  > balikin hurup yang dimasukin
+    let arrWord = word.split('')
+    let jadiNomor = []
+    let jadiHuruf = []
+    functionHurufkeAngka(arrWord,jadiNomor,num)
+    let nomorBaru = jadiNomor.map(functionValueAdd) // gini cara pake Map, tapi dia cma bisa 1 var gitu
+    functionAngkakeHuruf(nomorBaru,jadiHuruf) //manggil functionnya pake yang ada di atasnya aja
+    alert(jadiHuruf.join(''))
+    }
+    function26()
+    caesarCipher(word, num)
+// casearCipher
+}
+// cipher()
+
+// plusMinus
+const plusMinus = () => {
+    let numArr = [1,2,3,4]
+    let hasil = 0
+    for (let i=0; i<numArr.length; i++){
+        if (numArr[i]%2==0 || numArr[i] == 1){
+            hasil += numArr[i]
+            alert('hasil penjumlahan. angka ke '+[i+1]+'= '+hasil)}
+        else if (numArr[i]%2!=0){
+            hasil -= numArr[i]
+            alert('hasil pengurangan. angka ke '+[i+1]+'= '+hasil)}
+    }
+    alert('hasil akhir= '+hasil)
+
+}
+// plusMinus()
+
+// Palindrom
+const palindrom = () => {
+    let word = prompt('masukan kata: ').toUpperCase()
+    let wordBalik = word.split('').reverse().join('')
+    if (word.length%2 !=0 && word == wordBalik ){
+        alert(word + " palindrom")
+    }
+    else alert(word + " bukan Palindrom ==> " + wordBalik)
+    
+}
+// palindrom()
+    </script>
+</body>
+</html>

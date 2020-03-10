@@ -1,0 +1,4 @@
+1. gaboleh ada field kosong
+    kalo kosong, suruh isi ulang
+2. function untuk sort, jika nama ke klik, sort a-z; jika klik lagi z-a
+3. jika data kosong, alert data kosong

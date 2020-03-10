@@ -1,0 +1,9 @@
+>bikin mini market:
+>empat macam buah
+>setiap buah memiliki stok dan harga masing2
+>input satu persatu tiap buah, berapa banyak item yang ingin di beli
+ jika request lebih dari stock, program end dengan message stock ga cukup.
+ jika request cocok, tampilkan jumlah  harga yang harus dibayar(prompt) untuk customer dia harus isi berapa
+>kalo uangnya pas, makasih sudah pas,
+ kalo kurang, kabarin kurang berapa
+ kalo lebih, kembalian

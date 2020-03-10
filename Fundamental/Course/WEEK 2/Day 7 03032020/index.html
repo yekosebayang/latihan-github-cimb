@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let arr = ["Jakarta", "BSD", "Bandung", "Jogja"]
+    function hapus(keyword) {
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i].toLowerCase() == keyword.toLowerCase()){
+                arr.splice(i, 1)
+            } 
+        }
+    }
+    function check(keyword){
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i].toLowerCase() == keyword.toLowerCase()){
+                return true
+            }
+        }
+        return false
+    }
+    function repIndexOf(keyword){
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i].toLowerCase() == keyword.toLowerCase()){
+                return i
+            }
+        }
+        return -1
+    }
+    alert(repIndexOf(prompt(arr)))
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let main = true
+      let pymt = true 
+      let vsatu = true
+  
+      let satu,ordr,bayar,total
+
+      
+      //nama item
+      let nama =['Anggur','Jeruk','Mangga']
+      //stock item
+      let stck = [20,15,25]
+      //stock item harga
+      let hrga = [1,2,3]
+      //taro jumlah pesanan
+      let taro = [0,0,0]
+        
+      while(main == true){
+        while(vsatu){
+        let init = (`Toko TIGA buah ${'\n' + '\n'}`)
+        for (let i=0; i<nama.length; i++)
+        {init +=`${i+1}. ${nama[i]} ${hrga[i]}/pcs|  |Stock: ${stck[i]} ${'\n'}`}
+        init += `${stck.length+1} Check Out ${ordr} ${nama.length }` 
+        ordr = parseInt(prompt(init))
+          // alert(ordr)
+          if (ordr < 0){
+            alert("gaboleh negatif / lebih dari stock, isi ulang!")} 
+          else if (ordr <= nama.length){
+            satu = parseInt(prompt(nama[ordr-1] +' '+ hrga[ordr-1] + "/pcs" + "Stock tersedia: " + stck[ordr-1]))
+            if (satu < 0 || satu > stck[ordr-1]){
+              alert('Masukan total bilangan bulat, dan sesuai stock!')}
+          else{
+            taro[ordr-1] +=parseInt(satu)
+            stck[ordr-1] -=parseInt(satu)}}             
+            else if (ordr == nama.length+1){
+              total = 0
+              for (let i=0; i<nama.length; i++){
+                console.log(taro[i]*hrga[i])
+                total += (parseInt(taro[i]*hrga[i]))
+                console.log(total)}
+              pymt = true
+              while (pymt == true){
+                bayar = parseInt(prompt("Total belanjaan = " + total + " masukan uang anda"))
+                if (bayar < total) {
+                  alert("Uangnya kurang " + (total - bayar))
+                  alert("input ulang uangnya")
+                  continue}
+                else if (bayar > total){
+                  alert("Kembalianya " + (bayar - total) +  ". ikhlasin ya :)")
+                  pymt = false}
+                else if (bayar == total){
+                  alert("Terimakasih, uangnya pas");
+                  pymt = false}
+                  let blen = confirm("Jajan lagi?")
+              if (blen == true){
+              //stock item update
+                taro.fill(0)
+                vsatu = true
+                main = true}
+              else{
+                main = false} 
+            }
+          }
+        }
+      }       
+      alert('BELANJA LAGI YA!!') 
+       
+    </script>
+  </body>
+</html>

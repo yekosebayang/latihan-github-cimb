@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function textUserMMenu(){
+            (`Belanja?
+            1. Buah
+            2. Hand-phone
+            3. Atasan(Baju)`)
+
+        let optn = parseInt(prompt(textMulaiAdmin))
+        if (optn == 1){
+            isiQtyBuah()      
+            textUserMMenu()}
+        else if (optn == 2){   
+            // isiQtyHandPhone()
+            alert("Belanja HAPE")
+            textUserMMenu()} 
+        else if (optn == 3)
+            // isiQtyBaju()
+            alert("belanja Baju")
+            textUserMMenu()
+        else if (optn == 4){
+            alert("Exit")
+            mainMenu()
+
+        }
+        else{
+            alert('isinya ga sesuai, pilih sesuai option!')
+            mainMenu()
+        }
+        }
+    </script>
+</body>
+</html>

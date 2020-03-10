@@ -1,0 +1,5 @@
+kasih user kesempatan untuk input ulang
+setiap prompt dikasih loopnya sendiri
+kalo uang nya kurang, kasih dia kesempatan isi lagi(kalo bisa tambah kurangnya aja)
+mau belanja lagi ga? - kasih loopnya
+kalo belanja lagi, tampilkan stock baru, yang terupdate

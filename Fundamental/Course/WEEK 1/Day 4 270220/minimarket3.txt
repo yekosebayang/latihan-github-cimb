@@ -1,0 +1,4 @@
+>>1st view menu
+  option, 1,2,3 (Dengan keterangan isinya (harga dan stok) apa aja)  
+  setelah pilih, muncul lagi, mau berapa banyak itemnya?
+  bayar

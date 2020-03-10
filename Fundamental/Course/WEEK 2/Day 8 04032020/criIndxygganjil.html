@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let stringHere = " ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+       let stringH = stringHere.split('')
+
+       let stringInput = "abc"//"Bakwan Jagung"
+       let stringI = stringInput.split('')
+
+    //    let ininya = 0 
+    let ininya = ''
+        // for (let i = 0; i<stringI.length; i+=2) {
+        //     // if (stringH.indexOf(stringI[i].toUpperCase())%2 != 0){
+        //         ininya += stringH.indexOf(stringI[i].toUpperCase())}
+        //     // }
+        for (let i = 0; i<stringI.length; i++) {            
+            ininya += `${stringH.indexOf(stringI[i].toUpperCase())}`}
+            // }
+        alert(ininya)
+    </script>
+</body>
+</html>

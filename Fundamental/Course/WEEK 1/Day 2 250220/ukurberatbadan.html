@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let init = "Ukur berat badan ideal";
+      let satu = parseFloat(prompt("masukan Berat badan(Kg)"));
+      let duwa = parseFloat(prompt("masukan Tinggi badan(M)"));
+      let BBTB = parseFloat(satu / (duwa * duwa));
+      if (BBTB >= 40) {
+        alert(BBTB + " = Obesitas");
+      } else if (BBTB >= 30) {
+        alert(BBTB + " = BB Berlebih");
+      } else if (BBTB >= 25) {
+        alert(BBTB + " = BB Berlebih");
+      } else if (BBTB >= 18.5) {
+        alert(BBTB + " = BB Berlebih");
+      } else alert(BBTB + " = BB Kurang");
+    </script>
+  </body>
+</html>

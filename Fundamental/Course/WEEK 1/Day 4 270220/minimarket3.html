@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let main = true
+      let pymt = true 
+      let vsatu = true
+      let vduwa = true
+      let vtiga = true
+
+      let satu,duwa,tiga,total,ordr
+      
+      //nama item
+      let nama = ['Anggur','Jeruk','Mangga']
+      //stock item
+      let stck = [20,15,25]
+      //stock item harga
+      let hrga = [1,2,3]
+      //taro jumlah pesanan
+      let taro = [0,0,0]
+        
+      while(main == true){
+        let init = (`Toko TIGA buah ${'\n' + '\n'}`)
+        for (let i=0; i<nama.length; i++)
+        {init +=`${i+1} ${nama[i]} ${hrga[i]}/pcs|  |Stock: ${stck[i]} ${'\n'}`}
+        init += `${stck.length+1} Check Out` 
+        ordr = parseInt(prompt(init))
+        if (ordr == 1){
+          while(vsatu){
+            satu = parseInt(prompt("Anggur 1/pcs   | Stock tersedia: " + stck[0]))
+            if (satu < 0 ||satu>stck[0]){
+              alert("gaboleh negatif / lebih dari stock, isi ulang!")} 
+            else{
+              taro[0] +=parseInt(satu)
+              stck[0] -=parseInt(satu) 
+              vsatu = false}}
+            }
+        else if (ordr == 2){
+          while(vduwa){
+            satu = parseInt(prompt("Jeruk 2/pcs   | Stock tersedia: " + stck[1]))
+            if (satu < 0 ||satu>stck[1]){
+              alert("gaboleh negatif / lebih dari stock, isi ulang!")} 
+            else{
+              taro[1] +=parseInt(satu)// coba ganti isi [x] dengan kondisi jadi kita gaperlu
+              stck[1] -=parseInt(satu)// cape2 bikin loop banyak2 
+              vduwa = false}}// jadi itung di satu tempat aja kan yang penting isi kodingannya 50 - 52
+            }
+        else if (ordr == 3){
+          while(vtiga){
+            satu = parseInt(prompt("Mangga 3/pcs   | Stock tersedia: " + stck[2]))
+            if (satu < 0 ||satu>stck[2]){
+              alert("gaboleh negatif / lebih dari stock, isi ulang!")} 
+            else{
+              taro[2] +=parseInt(satu)
+              stck[2] -=parseInt(satu) 
+              vtiga = false}}
+            }
+        else if (ordr == 4){
+          total = parseInt((taro[0]*hrga[0]) + (taro[1]*hrga[1]) + (taro[2]*hrga[2]))
+          pymt = true
+          while (pymt == true) 
+          {
+            let bayar = parseInt(prompt("Total belanjaan = " + total + " masukan uang anda"))
+            if (bayar < total) {
+              alert("Uangnya kurang " + (total - bayar))
+              alert("input ulang uangnya")
+              continue}
+            else if (bayar > total){
+              alert("Kembalianya " + (bayar - total) +  ". ikhlasin ya :)")
+              pymt = false}
+            else if (bayar == total){
+              alert("Terimakasih, uangnya pas");
+              pymt = false}
+              let blen = confirm("Jajan lagi?")
+            if (blen == true){
+            //stock item update
+              taro.fill(0)
+              console.log(taro)
+              vsatu = true
+              vduwa = true
+              vtiga = true
+              main = true}
+            else{
+              main = false} 
+          }
+           
+        }
+      }
+      alert('BELANJA LAGI YA!!') 
+       
+    </script>
+  </body>
+</html>

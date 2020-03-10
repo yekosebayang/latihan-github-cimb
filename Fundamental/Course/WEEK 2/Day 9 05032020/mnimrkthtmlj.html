@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    table, tr, td{
+        border: 1px solid black;
+        border-collapse: collapse;}
+</style>
+  <body>
+    <table id="table">
+      <tr>
+          <td>Nama</td><td>Stock</td><td>Harga</td>
+      </tr>
+  </table>
+    <script>
+      let main = true
+      let pymt = true 
+      let vsatu = true
+  
+      let satu,ordr,bayar,total,totalcart
+
+      
+      //nama item
+      let buah= [
+        {nama: "Anggur", stock: 20, harga:1, qty: 0},
+        {nama: "Jeruk", stock: 15, harga:2, qty: 0},
+        {nama: "Mangga", stock: 25, harga:3, qty: 0}]
+        // document.getElementById("1").innerHTML = `Toko Tiga Buah <br>` 
+        for (let i=0; i<buah.length; i++)
+        {document.getElementById("table").innerHTML +=`<tr><td><strong>${buah[i].nama}</strong> <td><i>${buah[i].harga}/pcs</i></td> <td>stock: ${buah[i].stock}</td>`}
+      // while(main == true){
+      //   while(vsatu){
+      //   document.getElementById('1').innerHtml = `Toko Tiga Buah <br>` 
+      //   for (let i=0; i<buah.length; i++)
+      //   {document.getElementById('1').innerHtml +=`<br> ${i+1}. ${buah[i].nama} ${buah[i].harga}/pcs|  |Stock: ${buah[i].stock} ${'\n'}`}
+      //   init += `${'\n'}${buah.length+1} List Cart ${'\n'}` 
+      //   init += `${buah.length+2} Check Out `
+      //   ordr = parseInt(prompt(init))
+      //   console.log(buah[0].qty)
+      //   console.log(buah[1].qty)
+      //   console.log(buah[2].qty)
+          
+      //     if (ordr < 0){
+      //       alert("gaboleh negatif / lebih dari stock, isi ulang!")} 
+      //     else if (ordr <= buah.length){
+      //       satu = parseInt(prompt(buah[ordr-1].nama +' '+ buah[ordr-1].harga + "/pcs" + "Stock tersedia: " + buah[ordr-1].stock))
+      //       if (satu < 0 || satu > buah[ordr-1].stock[ordr-1]){
+      //         alert('Masukan total bilangan bulat, dan sesuai stock!')}
+      //       else{
+      //       buah[ordr-1].qty +=parseInt(satu)
+      //       buah[ordr-1].stock -=parseInt(satu)}}             
+      //     else if (ordr == buah.length+2){
+      //       total = 0
+      //       for (let i=0; i<buah.length; i++){
+      //         total += (parseInt(buah[i].qty*buah[i].harga))}
+      //         pymt = true
+      //         while (pymt == true){
+      //           bayar = parseInt(prompt("Total belanjaan = " + total + " masukan uang anda"))
+      //           if (bayar < total) {
+      //             alert("Uangnya kurang " + (total - bayar))
+      //             alert("input ulang uangnya")
+      //             continue}
+      //           else if (bayar > total){
+      //             alert("Kembalianya " + (bayar - total) +  ". ikhlasin ya :)")
+      //             pymt = false}
+      //           else if (bayar == total){
+      //             alert("Terimakasih, uangnya pas");
+      //             pymt = false}
+      //             let blen = confirm("Jajan lagi?")
+      //         if (blen == true){
+      //         //stock item update
+      //           for (let i=1; i<buah.length; i++)
+      //           {buah[i].qty = 0}
+      //           vsatu = true
+      //           main = true
+      //         }
+      //         else{
+      //           main = false} 
+      //       }
+      //     }
+      //     else if (ordr == buah.length+1){
+      //       let carts =`ISI KERANJANG \n`
+      //       totalcart=0
+      //       for (let i=0; i<buah.length; i++)
+      //           {totalcart += (parseInt(buah[i].qty*buah[i].harga))
+      //           if(buah[i].qty > 0){
+      //               carts +=`${buah[i].nama} => ${buah[i].qty} Total = ${buah[i].qty*buah[i].harga}\n`}}
+      //       carts +=`\n Total Belanjaan ${totalcart}`
+      //       alert(carts)}
+      //   }
+      // }       
+      // alert('BELANJA LAGI YA!!')     
+       
+    </script>
+  </body>
+</html>

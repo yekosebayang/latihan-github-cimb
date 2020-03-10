@@ -1,0 +1,12 @@
+> Menu dipisah kedalam sebuah funtion
+> Cart masuk ke function, menerima parameter(index) >> si index buat ngisi logika yang di for
+> Total price masuk ke dalam function
+> payment jadi function
+> MENU BESAR
+  1. Admin
+        1. nambahin item, ngurangin item  
+        2. Exit > ke Menu BESAR (main menu?)
+  2. User
+        1. ya user, kaya yang udah2
+        2. exit (main menu?)
+  3. Exit

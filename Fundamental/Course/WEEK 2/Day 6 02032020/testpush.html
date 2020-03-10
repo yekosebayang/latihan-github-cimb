@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let buah= [
+    {nama: "Anggur", stock: 20, harga:1, qty: 0},
+    {nama: "Jeruk", stock: 15, harga:2, qty: 0},
+    {nama: "Mangga", stock: 25, harga:3, qty: 0}]
+
+    let namaBaru,stockBaru,hargaBaru
+    namaBaru = prompt(`Nama buah baru?`)
+    stockBaru = parseInt(prompt(`Jumlah stock buah baru?`))
+    hargaBaru = parseInt(prompt(`Harga buah baru per-pcs?`))
+
+    buah.push({nama: namaBaru, stock: stockBaru, harga: hargaBaru, qty: 0})
+    console.log(buah)
+    
+</script> 
+</body>
+</html>

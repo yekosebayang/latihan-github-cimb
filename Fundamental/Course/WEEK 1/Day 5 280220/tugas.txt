@@ -1,0 +1,10 @@
+>Data karyawan
+    Nama, Umur, Pekerjaan
+>Jmlah orang ada 5
+>tampilkan Nama, Umur, Pekerjaan tiap orang
+
+
+MINIMARKET 4 html
+>Nama, price, harga, dan  input disatuin dalam satu obj
+>Abis input > check cart apa tambah lagi?
+>check cart(alert) > balik ke atas

@@ -1,0 +1,13 @@
+> menu admin
+    ditambah delete slice()
+> menu user
+    1. Pilihan jenis barang
+        > Clothing > Size > S,M,L(admin, jadi user tinggal pilih yang ada aja) > 1,2,3(user)
+        > Phone > Warran > alert user, ga ada garansi nya mau tetep beli?
+        > Buah > idem > kasih exp date, kalo udh expire buah ini udah expire kasih alert buah kadaluarsa dalam..
+                        hint: new Date()
+                             can be used for subscription (membership)
+
+check cart, dan pembayaran, naik ke menu atas.
+dinamisin penjualan baju dsb.
+S

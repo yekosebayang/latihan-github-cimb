@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function zone
+      function mainMenu(){
+        let textMulai = (`MAIN-MENU 
+          
+          1. User  > Shop and Fun!
+
+          2. Admin > Edit item, etc.
+          3. Exit
+
+          Masukan menu yang diinginkan`)
+        let optn = parseInt(prompt(textMulai))
+        if (optn == 1){
+            UserMainMenu()
+            mainMenu()}
+        else if (optn == 2){   
+            admin()
+            mainMenu()} 
+        else if (optn == 3){
+            alert("TERIMA KASIH")
+            return}
+        else{
+            alert('isinya ga sesuai, pilih sesuai option!')
+            mainMenu()}
+      }
+
+      //function zone ADMIN ====================================================
+      function admin(){
+      let optn = parseInt(prompt(`
+      1. Add Item
+      2. Delete Item
+
+      3. Exit`))
+      if (optn == 1) adminAdd()
+      else if (optn == 2) adminDlt()
+      else if (optn == 3) mainMenu() 
+      }
+
+      function adminAdd(){
+        let textMulaiAdminAdd = (`TRAINOCATE-Store [1] \n\n1. Buah \n2. Phone \n3. Baju \n\n4. Exit`)
+        let optn = parseInt(prompt(textMulaiAdminAdd))
+        checkWishAdd(optn)
+      }
+
+      function checkWishAdd(optn){
+        let namaBaru = prompt(`Nama  baru?`)
+        let stockBaru = parseInt(prompt(`Jumlah stock buah baru?`))
+        let hargaBaru = parseInt(prompt(`Harga produk baru per-pcs?`))
+        if (optn == 1){            
+          let expire  = prompt(`Expire?`)
+          produkLet[optn-1].push(new Buah(namaBaru,stockBaru,hargaBaru, expire))
+          admin()}
+        else if (optn == 2){
+          let garansi = parseInt(prompt(`ada Garansi?`))    
+          produkLet[optn-1].push(new Phone(namaBaru,stockBaru,hargaBaru, garansi))
+          admin()}
+        else if (optn == 3){    
+          let size = parseInt(prompt(`Size-nya?`))
+          produkLet[optn-1].push(new Baju(namaBaru,stockBaru,hargaBaru, size))
+          admin()}
+        else if (optn == 4){
+            admin()}
+        }
+
+      function adminDlt(){
+        let pilihHapus
+        let textMulaiHapus = (`TRAINOCATE-Store [1] \n\n1. Buah \n2. Phone \n3. Baju \n\n4. Exit`)
+        pilihHapus = (prompt(textMulaiHapus))
+        pilihHapus2 = (prompt("Nama Item yang ingin dihapus"))
+        for (let i = 0; i < produkLet[pilihHapus-1].length; i++){
+          if (produkLet[pilihHapus-1][i].nama.toLowerCase() === pilihHapus2.toLowerCase()){
+            produkLet[pilihHapus-1].splice(produkLet[pilihHapus-1][i], 1)}}    
+        admin()    
+      }
+
+      //Function zone USER ====================================================
+      function UserMainMenu(){
+      let textMulaiUser = (`TRAINOCATE-Store [1] \n\n1. Buah \n2. Phone \n3. Baju \n\n4. Cart \n5. Check Out`)
+      let optn = parseInt(prompt(textMulaiUser))
+      checkWish(optn)}
+
+      function checkWish(optn){
+        if (optn <= 3){
+          isiQtyProduk(optn)      
+          checkWish()}
+        else if (optn == 5){
+          total = 0
+            for (let i=0; i<produkLet.length; i++){
+              for (let j=0; j<produkLet[i].length; j++){
+                total += parseInt(produkLet[i][j].qty*produkLet[i][j].harga)}}
+            shopCountPay(total)
+            blen()}
+        else if (optn == 4){
+            shopCart()}
+      }
+
+            
+      //function zone USER-isi QTY <<<----------------------------------------------------
+      function isiQtyProduk(optn){
+        let textMulaiQuantity = (`TRAINOCATE-Store [2]`)
+        for (let i=0; i<produkLet[optn-1].length; i++)
+        {textMulaiQuantity +=`\n${i+1}. ${produkLet[optn-1][i].nama} ${produkLet[optn-1][i].harga}/pcs|  |Stock: ${produkLet[optn-1][i].stock}`}
+        textMulaiQuantity += `\n${produkLet[optn].length +1} Back`
+        ordr = parseInt(prompt(textMulaiQuantity))
+        checkQty(ordr,optn)
+      }
+          
+      function checkQty(ordr,optn){
+        if (ordr < 0){
+          alert("gaboleh negatif / lebih dari stock, isi ulang!")
+          isiQtyProduk(optn)} 
+        else if (ordr <= produkLet[ordr-1].length){
+          quantity = parseInt(prompt(produkLet[optn-1][ordr-1].nama +' '+ produkLet[optn-1][ordr-1].harga + "/pcs" + "Stock tersedia: " + produkLet[optn-1][ordr-1].stock))
+          if (quantity < 0 || quantity > produkLet[optn-1][ordr-1].stock){
+            alert('Masukan total bilangan bulat, dan sesuai stock!')}
+          else if(optn == 1){
+            let expSplit = produkLet[optn-1][ordr-1].expdt.split('-')
+            let expired = new Date(expSplit[2], expSplit[1]-1, expSplit[0])
+            let today = new Date(Date.now())
+            if (expired <= today){
+              alert("Udah kadaluarsa, gabisa dibeli")
+              isiQtyProduk(optn)}
+            else
+              {produkLet[optn-1][ordr-1].qty +=parseInt(quantity)
+              produkLet[optn-1][ordr-1].stock -=parseInt(quantity)
+              isiQtyProduk(optn)}
+          }
+          else if(optn == 2){
+            if (produkLet[optn-1][ordr-1].garansi == 0){
+              let yakin = confirm("Ga ada garansi, gabisa dibeli [click OK untuk beli]")
+              if (yakin == true){
+                produkLet[optn-1][ordr-1].qty +=parseInt(quantity)
+                produkLet[optn-1][ordr-1].stock -=parseInt(quantity)
+                isiQtyProduk(optn)  
+              }}
+            else
+              {produkLet[optn-1][ordr-1].qty +=parseInt(quantity)
+              produkLet[optn-1][ordr-1].stock -=parseInt(quantity)
+              isiQtyProduk(optn)}
+              }
+          else{
+            produkLet[optn-1][ordr-1].qty +=parseInt(quantity)
+            produkLet[optn-1][ordr-1].stock -=parseInt(quantity)
+            isiQtyProduk(optn)}}
+        else if (ordr == produkLet[optn].length+1){
+            UserMainMenu()
+          }
+        else {
+            alert("isinya ga sesuai!")
+            checkQty(ordr,optn)}
+      }
+
+      function shopCart()
+      {
+        let carts =`ISI KERANJANG \n`
+            totalCart=0
+            for (let i=0; i<produkLet.length; i++)
+              for (let j=0; j<produkLet[i].length; j++)
+                {totalCart += (parseInt(produkLet[i][j].qty*produkLet[i][j].harga))
+                if(produkLet[i][j].qty > 0){
+                    carts +=`${produkLet[i][j].nama} => ${produkLet[i][j].qty} Total = ${produkLet[i][j].qty*produkLet[i][j].harga}\n`}}
+            carts +=`\n Total Belanjaan ${totalCart}`
+            alert(carts)
+            isiQtyProduk(optn)
+      }      
+
+      function shopCountPay(total){
+        bayar = parseInt(prompt("Total belanjaan = " + total + " masukan uang anda"))
+        shopPaymentOpt(bayar,total)
+      }
+
+      function shopPaymentOpt(bayar, total){
+        if (bayar < total) {
+            alert("Uangnya kurang " + (total - bayar) + " input ulang uang-nya")
+            shopCountPay(total)}
+        else if (bayar > total){
+            alert("Kembalianya " + (bayar - total) +  ". ikhlasin ya :)")}
+        else if (bayar == total){
+            alert("Terimakasih, uangnya pas")}
+        else{
+            alert("bayar-nya ga sesuai, input" + total)
+            shopCountPay(total)}
+      }
+
+      function blen(){
+        let blen = confirm("Belanja lagi?")
+        if (blen == true){
+             //stock item update
+            for (let i=0; i<produkLet.length; i++){
+              for (let j=0; j<produkLet[i].length; j++)
+                {produkLet[i][j].qty = 0}}
+                isiQtyProduk(optn)}
+        else
+            mainMenu() 
+
+
+
+
+
+      }   
+      class Produk{
+        constructor(nama, harga, stock){// kalo ga ada di parameter tapi ada di dalam class, pasti kepanggil
+          this.nama = nama 
+          this.harga = harga 
+          this.stock = stock
+          this.qty = 0 // im talkin about this guy
+        } 
+      }
+      class Buah extends Produk{
+        constructor(nama, harga, stock, expdt){
+          super(nama, harga, stock) //penamaan tidak harus sama dengan atasnya(parent) >> nama, ttl, asal << || penamaan ini untuk declare parentnya
+          this.expdt = expdt // ini tambahan ke parent-nya || bisa tembak langsung
+        }
+      }
+
+      class Phone extends Produk{
+        constructor(nama, harga, stock, garansi){
+          super(nama, harga, stock)
+          this.garansi = garansi
+        }
+      } 
+
+      class Baju extends Produk{
+        constructor(nama, harga, stock, size){
+          super(nama, harga, stock)
+          this.size = size
+        }
+      }
+
+
+    let quantity,ordr,bayar,total,totalCart
+    //nama item
+    let produkLet =[
+    [new Buah ("Anggur", 2, 15, "01-01-0001"),
+    new Buah ("Apel", 3, 15, "99-99-9999")],
+    [new Phone ("Grande", 100, 5, 1),
+    new Phone ("Swift", 90, 5, 0)],
+    [new Baju ("FiEstA", 6, 12, "S"),
+    new Baju ("DurabEx", 9, 14, "L")],
+    ]
+    mainMenu()
+    alert("Thank You")
+
+    </script>
+  </body>
+</html>
