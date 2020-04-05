@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>&nbsp;<input type="button" value="Start" onclick="start()">
+            <td><input type="button" value="Reset" onclick="reset()"></td>
+            <td><input type="button" value="Lap" onclick="lap()"></td>
+            <td><input type="button" value="Pause" onclick="pause()"></td>
+        </tr>
+    </table>
+    <h1 id="waktu"></h1>
+    <h3 id="lap"></h3>
+    <script>
+    let hitungLap = 0
+    let lel = 0
+    let microsec = 0
+    let sec = 0
+    let min = 0
+    let hour = 0
+    let hitungWaktu
+
+    const tick = () => {
+        lel+=100
+        if (lel == 1000){
+            microsec += 1
+            lel = 0}
+        if (microsec == 10){
+            sec += 1
+            microsec = 0}
+        if (sec == 60){
+            min += 1
+            sec = 0}
+        if (min == 60){
+            hour += 1
+            min = 0}
+        document.getElementById("waktu").innerHTML = `${hour}:${min}:${sec}:${microsec}`
+    }
+
+    const start = () => {
+        hitungWaktu = setInterval(tick, 10)
+    }
+
+    const pause = () => {
+        clearInterval(hitungWaktu)
+    }
+
+    const reset = () => {
+        clearInterval(hitungWaktu)
+        microsec = 0
+        sec = 0
+        min = 0
+        hour = 0
+        hitungLap = 0
+        document.getElementById("waktu").innerHTML = `${hour}:${min}:${sec}:${microsec}`
+        document.getElementById("lap").innerHTML = ``
+
+    }
+
+    const lap = () => {
+        let hasil = ''
+        hitungLap++
+        document.getElementById("lap").innerHTML += `${hitungLap}:   ${hour}:${min}:${sec}:${microsec} <br>`
+    }
+
+   
+    </script>
+    
+</body>
+</html>

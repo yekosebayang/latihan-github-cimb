@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, tr, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;}
+    </style>
+</head>
+<body>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="fungsiSort('nama')">Nama</th>
+                    <th onclick="fungsiSort('pekerjaan')">Pekerjaan</th>
+                    <th>Umur</th>
+                    <th>Jenis Kelamin</th>
+                    <th onclick="fungsiSort('gambar')">Gambar</th>
+                    <th>Biodata</th>
+                </tr>
+            </thead>
+            <tbody id="trainocate">
+            </tbody>
+            <tfoot>
+                    <tr>
+                        <td><input type="text" name="Input Nama" id="inputNama" placeholder="Input Nama"></td>
+                        <td><input type="text" name="" id="inputPekerjaan" placeholder="Input Pekerjaan"></td>
+                        <td><input type="text" name="" id="inputUmur" placeholder="Input Umur"></td>
+                        <td><form action="lel"><input type="radio" name="JKelamin" value="Pria">Pria 
+                            <input type="radio" name="JKelamin" value="Wanita">Wanita</form></td>
+                        <td><input type="text" name="" id="inputGambar" placeholder="(link picture)"></td>
+                        <td><textarea onkeyup="hitungKata()" name="" id="textArea" cols="24" rows="1"></textarea><br><p id="counter"></p></td>
+                        <td><input type="button" value="Submit" onclick="tambahData();
+                        document.getElementById('inputNama').value='';
+                        document.getElementById('inputPekerjaan').value='';
+                        document.getElementById('inputUmur').value='';
+                        document.getElementById('inputGambar').value='';
+                        document.getElementById('textArea').value='';
+                        tampilData()"></td>
+                    </tr>            
+            </tfoot>
+                
+        </table>
+    </center>
+    
+    <script>
+        let isNama = true
+        class Orang{
+    constructor(nama, pekerjaan, umur, jenisKelamin, gambar, bioD){// kalo ga ada di parameter tapi ada di dalam class, pasti kepanggil
+        this.nama = nama 
+        this.pekerjaan = pekerjaan 
+        this.umur = umur
+        this.jenisKelamin = jenisKelamin
+        this.gambar = gambar
+        this.bioD = bioD
+    } 
+}
+let dataOrang = [
+    [new Orang("Lydya","Kuli Angkut",22,'Wanita','https://i.redd.it/37g455i8b0111.jpg','Im swear to carry your burden'),
+    new Orang("Putri Glo","Hatsune kang Tiktok",19,'Wanita','https://pbs.twimg.com/profile_images/1229668690267795456/qwAi_Qvm_400x400.jpg','Didnt even notice'),
+    new Orang("Willy the Kid","Kang Sambat",26,'Pria','https://pbs.twimg.com/profile_images/1219408253697658880/cwl-wNM7_400x400.jpg','doamu di mute oleh allah')]
+]
+
+const tampilData = () => {
+    let hasil = ''
+    dataOrang[0].forEach(({nama, pekerjaan, umur, jenisKelamin, gambar, bioD}, index)=>{ //setiap pengulangan for each dia mau ngapain
+        // for each adalah function yang memerlukan callback funtion sebagai parameternya
+        hasil += `
+        <tr>
+            <td>${nama}</td>
+            <td>${pekerjaan}</td>
+            <td>${umur}</td>
+            <td>${jenisKelamin}</td>
+            <td><img src="${gambar}"width="100px"></td>
+            <td>${bioD}</td>
+            <td><input type="button" value="Delete" onclick="hapusData(${index}); tampilData()"></td>
+        </tr>`
+    })
+
+    if (dataOrang[0].length == 0) {
+        document.getElementById('trainocate').innerHTML = hasil
+        // document.body.style.display = "none"
+        alert("data kosong")}
+    else if (dataOrang[0].length > 0){
+        document.getElementById('trainocate').innerHTML = hasil}
+
+}
+
+const tambahData = () => {
+    let inputNama = document.getElementById("inputNama").value
+    let inputPekerjaan = document.getElementById("inputPekerjaan").value
+    let inputUmur = document.getElementById("inputUmur").value
+    let inputJKelamin = jenisKelamin()
+    let inputGambar = document.getElementById("inputGambar").value
+    let inputBioD = isiBioD()
+    if (inputNama == '' || inputPekerjaan == '' || inputUmur == ''|| inputGambar == '' || inputBioD == '')
+        {alert('Lengkapi dulu datanya ya :)')
+        tampilData()}
+        else{
+            let newData = new Orang(inputNama,inputPekerjaan,inputUmur,inputJKelamin,inputGambar,inputBioD)
+            dataOrang[0].push(newData)}   
+}
+
+const jenisKelamin = () => {//radio button
+    gender = document.getElementsByName("JKelamin")
+    for(let i= 0; i < gender.length; i++)
+    {if(gender[i].checked == true)
+        {return gender[i].value}}
+
+   }
+
+const isiBioD = () => {
+    text = document.getElementById("textArea").value
+    if (text.length > 30){
+        return text.slice(0,30).concat('...')}
+    else
+        return text
+}
+        
+const hitungKata = () => {
+    text = document.getElementById("textArea").value
+    document.getElementById("counter").innerHTML = `${text.length} max 30`
+
+}   
+
+const hapusData = (index) => {
+    dataOrang[0].splice(index,1)
+}
+
+const fungsiSort = (lyodra) => {
+    // if (kentang == 'inputNama' || kentang == 'inputPekerjaan' || kentang == 'inputGambar'){
+        dataOrang[0].sort(function(a,b){
+        let comparison = 0;
+        if (a[lyodra].toLowerCase() > b[lyodra].toLowerCase()) {// bracket => nama juga, tapi ada string di dalamnya
+            comparison = 1;}
+        else if (a[lyodra].toLowerCase() < b[lyodra].toLowerCase()) {
+            comparison = -1;}
+        
+            if (isNama == true){
+                console.log('masuk if')
+                return comparison}
+            else{
+                console.log('masuk else')
+                return comparison*-1
+            }
+        
+        // return comparison
+        })
+        console.log(isNama)
+        isNama = !isNama
+        tampilData()
+    // }
+}
+
+tampilData()
+
+    
+    </script>
+</body>
+</html>

@@ -25,7 +25,7 @@ let arr= [
 
 let arrN=[-7,-2,1,3,2,4,5,2,-12]
 const searchProductName = str => {
-    return arr.filter((value) => value.nama.toLowerCase().includes(str.toLowerCase()))
+    return arr.startsWith((value) => value.nama.toLowerCase().includes(str.toLowerCase()))
 }
 const searchProductPrice = (min, max) => {
     return arr.filter(value => value.harga >= min && val.harga <= max)
@@ -36,6 +36,5 @@ const searchPositive = arrN => {
     return [pos.reduce((a, b) => a + b), neg.reduce((a, b) => a + b)]
     }
 
-// console.log(searchProductName('ap'))
+console.log(searchProductName('ap'))
 // console.log(searchProductPrice(5000, 7000))
-console.log(searchPositive())

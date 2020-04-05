@@ -1,0 +1,53 @@
+
+        table,tr,td{
+            border: 1px solid black;
+            border-collapse: collapse;}
+        thead{color: red;}
+        .text-green{color: blue;}
+        #jeff{color: brown;}
+        .red{color: white;
+            background-color: red;
+        }
+        .blue{color: white;
+            background-color: blue
+        }
+        .black{color: white;
+            background-color: black
+        }
+        .container{ border: 1px solid purple;
+                    margin-top: 10px; 
+                    margin-bottom: 10px;
+                    margin-left: 14cm;
+                    margin-right: 14cm;
+                    padding: 10px 8px 10px 8px;
+                    /* jarak ke konten all or vert/horz or T R B L */
+                    /* berlaku untuk semua yang bisa di kasih jarak(satuan jarak) */
+                    border-radius: 8px;
+                    width: fit-content;
+                    /* margin untuk 10 px atas bawah kiri kanan */
+        }
+        .rounded{
+            padding: 6px 18px;
+            border-radius: 8px;
+            margin-left: 4px;
+            margin-right: 4px;
+            transition: all 0.35s;
+        }
+        .rounded:hover{
+            color: black;
+            background-color: white;
+        }
+
+        .peel{
+            padding: 6px 18px;
+            border-radius: 16px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        .peel:hover{
+            color: black;
+            background-color: white;
+            transition: background-color ease-in-out 250ms, color ease-in-out 250ms;
+        }
+
+    

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Menggambar</h1>
+    <p>1. Persegi</p>
+    <p>2. Segitiga siku, rata kiri</p>
+    <p>3. Segitiga siku, rata kanan</p>
+    <p><strong>Jenis bangunan <input type="text" name="bentuk" id="bentuk" placeholder="1,2,3"></strong></p>
+    <p><strong>Ukuran <input type="text" name="ukuran" id="ukuran" placeholder="ukuran bangunan"></strong></p>
+    <p><input type="button" value="lihat" onclick="bangunan(document.getElementById('bentuk').value,document.getElementById('ukuran').value)"></p>
+    <p id="yey"></p>
+    <script>
+    const bangunan = (opsi,besar) => {
+        let hasil = ''
+        if (opsi == 1){
+            for (let i = 0; i <= besar-1; i++) {
+                hasil += '<br>'
+                for (let j = 0; j <= besar-1; j++) {
+                hasil += '*'}
+            console.log(hasil)
+            }// empat x empat
+            document.getElementById('yey').innerHTML = hasil
+        }
+        if (opsi == 2){
+            for (let i = 0; i <= besar-1; i++) {
+                hasil += '<br>'
+                for (let j = 0; j <= i; j++) {
+                    hasil += '*'}
+                    console.log(hasil)
+                }// bikin segitiga |\    
+            document.getElementById('yey').innerHTML = hasil
+        }
+        if (opsi == 3){
+            for (let i = 0; i <= besar-1; i++) {
+                hasil += '<br>'
+                for (let h = besar-1; h >= i; h--){
+                    hasil += '&nbsp;&nbsp;'}
+                for (let j = 0; j <= i; j++) { 
+                    hasil += '*'}
+            console.log(hasil)
+            }// bikin segitiga /|
+            document.getElementById('yey').innerHTML = hasil
+        }
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+field baru 
+    "gender" pake radio button
+    "Biodata" pake text, maksimal 30 char.
+        jika lebih dari 30, sisanya '...'
+        bikin live character count

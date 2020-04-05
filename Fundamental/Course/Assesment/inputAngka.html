@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let input1
+        let arr = []
+        const isiMasukan = () => {
+            input1 = parseInt(prompt("Masukkan Angka"))
+            checK(input1)
+        }
+
+        const checK = (inp) => {
+            console.log(inp)
+            if (isNaN(inp) == true){
+                arr.sort(function (a, b) {
+                    if (a > b) {
+                        return -1}
+                    if (b > a) {
+                        return 1}
+                    return 0})
+                    console.log(`angka terbesar: ${arr[0]}`)
+                    console.log(`angka terkecil: ${arr[arr.length-1]}`)
+                console.log(arr)}
+            else{
+                arr.push(input1)
+                isiMasukan()}
+        }
+        
+        isiMasukan()
+
+    </script>
+</body>
+</html>

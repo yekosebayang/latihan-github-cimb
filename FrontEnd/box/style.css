@@ -1,0 +1,33 @@
+/* class < Id < Style */
+
+.box{
+    height: 50px;
+    width: 50px;
+    background-color: grey;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container3{
+    display: flex;
+    justify-content: end;
+}
+
+.container4{
+    display: flex;
+    margin-right: auto;
+}
+
+.spaceW{
+    padding: 0px 3px 0px 3px;
+}

@@ -1,3 +1,5 @@
+// akses object
+
 let mobil = {
     tahun : 2000,
     merek : 'Toyota',

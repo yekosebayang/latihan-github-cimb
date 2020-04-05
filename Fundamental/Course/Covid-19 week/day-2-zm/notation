@@ -1,0 +1,24 @@
+bracket >> manggil isinya
+misal nama = "kemangi"
+berearti arr[nama] = arr["kemangi"]
+bracket menerima string, tntu sja case sensitive
+
+
+dot >> 
+
+let saya = {
+    nama = 'Yeko',
+    job = 'World saviour',
+    stat = 'healthy',
+
+}
+    let nama = 'stat'
+
+console.log(saya[nama]) >>  bracket dalamnya dianggap variable
+console.log(saya.nama)
+
+output::
+sehat >>  ambil dari 'stat' >> jadi saya.'stat'
+yeko >>  ini langsung saya.nama gitu
+
+contoh forOF nya di forOf2.js

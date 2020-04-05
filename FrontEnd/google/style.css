@@ -1,0 +1,40 @@
+.nav-bar{
+    display: flex;
+    justify-content: end;
+    padding: 15px 15px 0 0;
+}
+
+.google-text{
+    display: flex;
+    justify-content: center;
+}
+
+.google-font{
+    font-size: 3cm;
+}
+
+.padding-ding{
+    padding: 0px 5px 0px 5px;
+}
+
+.image-style1{
+    height: 17px;
+    width: 17px;
+}
+
+.peel{
+    padding: 6px 30px;
+    border-radius: 16px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.icon-search{
+    position: absolute;
+    left: 14.2cm;
+    padding: 3px 0px 3px 0px;
+}
+
+.space-between{
+    padding: px 15px 0px 15px;
+}

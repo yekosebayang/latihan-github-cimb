@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, tr, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;}
+    </style>
+</head>
+<body>
+    <fieldset><legend>Filter</legend><br>
+        <p>Nama: <input type="text" name="filterNama" id="filterNama" onkeyup="cariData()"></p><br>
+        <p>Harga: <input type="number" name="filterHargaMin" id="filterHargaMin" placeholder="min" onkeyup="cariData()"> - <input type="number" name="filterHargaMax" id="filterHargaMax" placeholder="max" onkeyup="cariData()"></p><br>
+        <p>Kategori: <select name="selectFilterKategor" id="pilihKategoriFilter" onchange="cariData()">
+            <option value="" selected="true" disabled>Pilih Kategori</option>
+            <option value="Baju">Baju</option>
+            <option value="Buah">Buah</option>
+            <option value="Phone">Phone</option>
+        </select></p><br>
+    </fieldset>
+    <fieldset><legend>Input Data</legend>
+        <table id="tabelInput" cellpadding="10">
+            <tr>
+                <td><input type="text" name="inputNama" id="inputNama" placeholder="Nama"></td>
+                <td><input type="text" name="inputHarga" id="inputHarga" placeholder="Harga"></td>
+                <td><select name="selectFilterKategor" id="pilihKategoriInput">
+                    <option value="" selected="true" disabled>Pilih Kategori</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Buah">Buah</option>
+                    <option value="Phone">Phone</option>
+                </select></td>
+                <td><input type="text" name="inputStock" id="inputStock" placeholder="Stock"></td>
+            </tr>
+        </table><br>
+        <input type="button" value="Submit" onclick="tambahData();">       
+    </fieldset>
+    <fieldset><legend>Tabel Data</legend>
+        <table id="tabelData" cellpadding="10">
+            <thead>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td><strong>Kategori</strong></td>
+                    <td><strong>Nama</strong></td>
+                    <td><strong>Harga</strong></td>
+                    <td><strong>Stok</strong></td>
+                    <td><strong>Beli</strong></td>
+                    <th colspan="2">Pilih</th>
+                </tr>
+            </thead>
+            <tbody id="isiArray">
+            </tbody>
+        </table>
+
+    </fieldset>
+    <fieldset><legend>Keranjang Belanja</legend>
+        <table id="tabelData" cellpadding="10">
+            <thead>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td><strong>Kategori</strong></td>
+                    <td><strong>Nama</strong></td>
+                    <td><strong>Harga</strong></td>
+                    <td><strong>Qty</strong></td>
+                    <td colspan="3"><strong>Pilih</strong></td>
+                </tr>
+            </thead>
+            <tbody id="isiKeranjangBelanja"></tbody>
+        </table><br>
+        <input type="button" value="Payment" onclick="tampilBayar(arrKeranjang);hitungBayar()">
+    </fieldset>
+    <fieldset><legend>Pembayaran</legend>
+        <h1>Transaction Detail</h1>
+        <div id='isiBayar'></div>
+        <p id='hitungWaktu'></p>
+    </fieldset>
+    <script>
+        class Produk{
+            constructor(id, nama, harga, kategori, stok) {
+                this.id = id
+                this.nama = nama
+                this.harga = harga
+                this. kategori = kategori
+                this.stok = stok
+                this.qty = 0
+            }
+        }
+        
+        let dataProduk = [
+            [new Produk (1583981053449, 'HM', 12000, 'Baju', 10),
+            new Produk (15839810531232, 'Jeruk', 20000, 'Buah', 10),
+            new Produk (1583981002949, 'Samsung', 40000, 'Phone', 10)]]
+    
+    const selector = (id) =>{ //menggunakan function untuk mempersingkat typing
+        return document.getElementById(id)
+    }
+        
+    const tampilData = (arr = dataProduk[0], editIdx) => {
+        let hasil = ''
+        arr.forEach(({id, nama, harga, kategori, stok}, index)=>{ //setiap pengulangan for each dia mau ngapain
+        // for each adalah function yang memerlukan callback funtion sebagai parameternya
+        if (index != editIdx){
+            hasil += `
+            <tr>
+                <td>${id}</td>
+                <td>${kategori}</td>
+                <td>${nama}</td>
+                <td>${harga}</td>
+                <td>${stok}</td>
+                <td><input type="button" value="Beli" onclick="beliProduk(${id}); tampilData()"></td>
+                <td><input type="button" value="Hapus" onclick="hapusData(${id}); tampilData(); tampilKeranjang(arrKeranjang)"></td>
+                <td><input type="button" value="Ubah" onclick="fungsiEdit(${id});"></td>
+            </tr>`
+        }
+        else{
+            hasil += `
+            <tr>
+                <td><input type="text" placeholder="${id}" disabled></td>
+                <td><input type="text" placeholder="${kategori}" disabled></td></td>
+                <td><input type="text" value="${nama}" id="ubahNama"></td></td>
+                <td><input type="text" value="${harga}" id="ubahHarga"></td></td>
+                <td><input type="text" value="${stok}" id="ubahStok"></td>
+                <td><input type="button" value="Beli" disabled></td>
+                <td><input type="button" value="Simpan" onclick="fungsiSimpan(${id}); tampilData()"></td>
+                <td><input type="button" value="Batal" onclick="tampilData();"></td>
+            </tr>`
+        }
+    })
+    selector('isiArray').innerHTML = hasil
+    }
+    
+    const tambahData = () => {
+        let tdDate = new Date()
+        let tambahNama = selector('inputNama').value
+        let tambahHarga = selector('inputHarga').value
+        let tambahKategori = selector('pilihKategoriInput').value
+        let tambahStock = selector('inputStock').value
+
+        let tambahData = new Produk(tdDate.getTime(), tambahNama, tambahHarga, tambahKategori, tambahStock)
+        dataProduk[0].push(tambahData)
+        tampilData()
+    }
+    
+    const cariData = () => {
+        let hasilBaru = []
+        let cariNama = selector('filterNama').value
+        console.log(cariNama)
+        let cariKategori= selector('pilihKategoriFilter').value    
+        let hargaMax = selector('filterHargaMax').value
+        let hargaMin = selector('filterHargaMin').value
+        if (!hargaMax){
+            hargaMax = 999999999999}
+        if (!hargaMin){
+            hargaMin = 0}
+        dataProduk[0].forEach((dataTampung) => {
+        let {nama, kategori, harga} = dataTampung
+        if (nama.toLowerCase().startsWith(cariNama.toLowerCase()) &&
+            kategori.startsWith(cariKategori) &&
+            harga <= hargaMax && harga >= hargaMin )
+            {hasilBaru.push(dataTampung)}
+            console.log(kategori.toLowerCase().startsWith(cariNama.toLowerCase()))
+            })
+        console.log(hasilBaru)    
+        tampilData(hasilBaru)
+    }
+    
+    const hapusData = (id) => {
+        let idx = dataProduk[0].findIndex((val) => val.id == id) //dataproduk dicari indexnya,
+        let idxy = arrKeranjang.findIndex((val) => val.id == id)
+        dataProduk[0].splice(idx,1)//dengan kondisi index data produk yang diwakili val
+    // dimana/jadi val.id isinya data produk id, dibandingin sama id dari parameter, kalo sama itulah nilai IDX
+        if (idxy != -1){ // cek, aray yang di cari di idxy ada gasih?
+            arrKeranjang.splice(idxy,1)}
+    }
+
+    const beliProduk = (id) => {
+        let beli = dataProduk[0].find((val) => val.id == id)// ini object kembaliannya
+        let keranjang = arrKeranjang.find((val) => val.id == beli.id)// ini object kembaliannya
+        // console.log(keranjang)
+        if (keranjang){
+            let idx = arrKeranjang.findIndex((val) => val.id == keranjang.id)
+            if (arrKeranjang[idx].qty == beli.stok){
+                alert('Stock habis')}
+            else{
+                arrKeranjang[idx].qty++}
+            }
+        else{
+            let itemBaruKeranjang = {
+                ...beli,
+                qty: 1}
+            arrKeranjang.push(itemBaruKeranjang)
+        }
+        tampilKeranjang(arrKeranjang)
+    }
+
+    const ubahKeranjang = (id, lel) => {
+        let idx = arrKeranjang.findIndex((val) => val.id == id)
+        console.log(lel)
+        if (lel == 'kurang'){
+            console.log("kip mep")
+            if (arrKeranjang[idx].qty == 1){
+                arrKeranjang.splice(idx,1)
+            }
+            else{
+                arrKeranjang[idx].qty -= 1}
+        }
+        else if (lel == 'tambah'){
+            let idxx = dataProduk[0].find((val) => val.id == id)
+            console.log(idxx)
+            if (arrKeranjang[idx].qty == idxx.stok){
+                alert('Stock habis')}
+            else{
+                arrKeranjang[idx].qty++}
+        }
+        else if (lel == 'hapus'){
+            console.log("shylens shylens")
+            arrKeranjang.splice(idx,1)
+        }
+        return arrKeranjang
+    }
+
+    const tampilKeranjang = (arr = arrKeranjang) => {
+        let hasil = ''
+        arr.forEach(({id, nama, harga, kategori, qty})=>{ //setiap pengulangan for each dia mau ngapain
+        // for each adalah function yang memerlukan callback funtion sebagai parameternya
+        hasil += `
+        <tr>
+            <td>${id}</td>
+            <td>${nama}</td>
+            <td>${harga}</td>
+            <td>${kategori}</td>
+            <td>${qty}</td>
+            <td><input type="button" value="+" id="ubahKeranjang" onclick="ubahKeranjang(${id},'tambah'); tampilKeranjang(arrKeranjang)"></td>
+            <td><input type="button" value="-" id="ubahKeranjang" onclick="ubahKeranjang(${id},'kurang'); tampilKeranjang(arrKeranjang)"></td>
+            <td><input type="button" value="hapus" id="ubahKeranjang" onclick="ubahKeranjang(${id},'hapus'); tampilKeranjang(arrKeranjang)"></td>
+
+        </tr>`
+    })
+
+    selector('isiKeranjangBelanja').innerHTML = hasil
+    }
+
+    const fungsiEdit = (id) => {
+        let idxEdit = dataProduk[0].findIndex((val) => val.id == id)
+        tampilData(dataProduk[0],idxEdit)
+    }
+
+    const fungsiSimpan = (id) => {
+        let idxEdit = dataProduk[0].findIndex((val) => val.id == id)
+
+        dataProduk[0][idxEdit].nama = selector('ubahNama').value
+        dataProduk[0][idxEdit].harga = selector('ubahHarga').value
+        dataProduk[0][idxEdit].stok = selector('ubahStok').value
+    }
+
+    const tampilBayar = (arr = arrKeranjang) => {
+        let hasil =''
+        let totalBayar = 0
+        let pajak = 0
+        let totalBayarPajak = 0
+        arr.forEach(({nama, harga, kategori, qty}) => {
+            totalBayar += harga*qty
+            hasil += `
+                ${kategori} = ${nama}|   |${harga} x ${qty} => ${harga*qty}<br>`
+            })        
+        pajak = totalBayar * 0.1
+        totalBayarPajak = parseInt(totalBayar+pajak)
+        hasil += `<br>Total belanjaan = ${totalBayar}`
+        hasil += `<br>Pajak 10% = ${pajak}<br>` 
+        hasil += `<br>Sub Total = ${totalBayarPajak}`
+        hasil += `
+        <br><input type="text" name="" id="bayar" placeholder="${totalBayarPajak}">
+        <input type="button" value="Bayar" onclick="fungsiBayar(${totalBayarPajak})">`
+        selector('isiBayar').innerHTML = hasil
+        }    
+
+    const kurangStock = (id) => {
+        let idxStok = dataProduk[0].find((val) => val.id == id)
+        arrKeranjang.splice(0)
+    }
+
+    const fungsiBayar = (tot) => {
+        if ((selector('bayar').value) == tot){
+            // console.log(dataProduk[0][nomor untuk mendapatkan array tertentu].id)
+            alert('lunas')
+            arrKeranjang = []
+            selector('isiBayar').innerHTML = ''  
+        }
+        else if ((selector('bayar').value) < tot){
+            alert(`uang anda kurang Rp.${tot - (selector('bayar').value)}`)
+        }
+        else if ((selector('bayar').value) > tot){
+            alert(`kembalian anda Rp.${(selector('bayar').value) - tot}`)
+            
+        }
+        tampilKeranjang()
+    }
+    
+    hitungBayar = () => {
+        let x = 0
+        let waktuBayar = setInterval(() => {
+            if (x == 15){
+                clearInterval(waktuBayar)
+                alert('Pesanan kami batalkan')
+                arrKeranjang = []
+                selector('isiBayar').innerHTML = ''  
+                tampilKeranjang()  
+            }
+            selector('hitungWaktu').innerHTML = `waktu anda sisa ${15-x}`
+            x++
+        },1000)
+    }
+    arrKeranjang = []
+    tampilData()
+    </script>
+</body>
+</html>
